@@ -24,21 +24,11 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 var exec = require('cordova/exec');
 
-function FileOpener2() {}
+function ConfigReader() {}
 
-FileOpener2.prototype.open = function (fileName, contentType, callbackContext) {
+ConfigReader.prototype.get = function (preferenceName, callbackContext) {
     callbackContext = callbackContext || {};
-    exec(callbackContext.success || null, callbackContext.error || null, 'FileOpener2', 'open', [fileName, contentType]);
+    exec(callbackContext.success || null, callbackContext.error || null, 'ConfigReader', 'get', [preferenceName]);
 };
 
-FileOpener2.prototype.uninstall = function (packageId, callbackContext) {
-    callbackContext = callbackContext || {};
-    exec(callbackContext.success || null, callbackContext.error || null, 'FileOpener2', 'uninstall', [packageId]);
-};
-
-FileOpener2.prototype.appIsInstalled = function (packageId, callbackContext) {
-    callbackContext = callbackContext || {};
-    exec(callbackContext.success || null, callbackContext.error || null, 'FileOpener2', 'appIsInstalled', [packageId]);
-};
-
-module.exports = new FileOpener2();
+module.exports = new ConfigReader();
