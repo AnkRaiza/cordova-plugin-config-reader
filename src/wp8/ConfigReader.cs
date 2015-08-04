@@ -11,7 +11,7 @@ using System.IO;
 
 namespace WPCordovaClassLib.Cordova.Commands
 {
-    public class FileOpener2 : BaseCommand
+    public class ConfigReader : BaseCommand
     {
 
         public async void open(string options)
@@ -28,11 +28,7 @@ namespace WPCordovaClassLib.Cordova.Commands
                 // Launch the bug query file.
                 await Windows.System.Launcher.LaunchFileAsync(file);
 
-                DispatchCommandResult(new PluginResult(PluginResult.Status.OK), aliasCurrentCommandCallbackId);
-            }
-            catch (FileNotFoundException)
-            {
-                DispatchCommandResult(new PluginResult(PluginResult.Status.IO_EXCEPTION), aliasCurrentCommandCallbackId);
+                DispatchCommandResult(new PluginResult(PluginResult.Status.OK, "{result:\"data\"}"));
             }
             catch (Exception)
             {
