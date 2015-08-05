@@ -18,21 +18,19 @@ namespace WPCordovaClassLib.Cordova.Commands
         {
             string[] args = JSON.JsonHelper.Deserialize<string[]>(options);
 
-            string aliasCurrentCommandCallbackId = args[2];
+            string preferenceName = args[0];
 
             try
             {
-                // Get the file.
-                StorageFile file = await Windows.Storage.StorageFile.GetFileFromPathAsync(args[0]);
+                // Get the pref.
+                IsolatedStorageSettings appSettings = IsolatedStorageSettings.ApplicationSettings;
+                string val = (string)appSettings[preferenceName];
 
-                // Launch the bug query file.
-                await Windows.System.Launcher.LaunchFileAsync(file);
-
-                DispatchCommandResult(new PluginResult(PluginResult.Status.OK, "{result:\"data\"}"));
+                DispatchCommandResult(new PluginResult(PluginResult.Status.OK, val));
             }
             catch (Exception)
             {
-                DispatchCommandResult(new PluginResult(PluginResult.Status.ERROR), aliasCurrentCommandCallbackId);
+                DispatchCommandResult(new PluginResult(PluginResult.Status.ERROR), "error");
             }
         }
     }
