@@ -62,7 +62,7 @@ public class ConfigReader extends CordovaPlugin {
 	private void _get(String PreferenceName, CallbackContext callbackContext) throws JSONException {
 		String KeyVal;
 		Context context = cordova.getActivity();
-		SharedPref = PreferenceManager.getDefaultSharedPreferences(context);
+		SharedPref = context.getSharedPreferences("configStrings", Context.MODE_PRIVATE);
 		try{				
 			if(SharedPref.contains(PreferenceName)){
 				KeyVal = SharedPref.getString(PreferenceName, "nada");
