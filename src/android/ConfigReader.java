@@ -16,18 +16,15 @@ COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
 IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
-package io.github.pwlin.cordova.plugins.fileopener2;
+package io.github.pwlin.cordova.plugins.configreader;
 
-import java.io.File;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.net.Uri;
-import android.preference.PreferenceManager;
+import android.content.Context;
+import android.content.SharedPreferences;
 //import android.util.Log;
 
 import org.apache.cordova.CordovaPlugin;
@@ -62,9 +59,9 @@ public class ConfigReader extends CordovaPlugin {
 	}
 
 	private void _get(String PreferenceName, CallbackContext callbackContext) throws JSONException {
-		SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+		SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(Context);
 		try {
-				String preferenceValue = preferences.getString(PreferenceName, "");
+				String preferenceValue = preferences.getString(PreferenceName, "algo");
 				callbackContext.success(preferenceValue);
 			} catch (Exception e) {
 				JSONObject errorObj = new JSONObject();
