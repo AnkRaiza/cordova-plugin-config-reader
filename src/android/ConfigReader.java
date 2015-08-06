@@ -27,6 +27,7 @@ import org.json.JSONObject;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.preference.PreferenceManager;
 //import android.util.Log;
 
 import org.apache.cordova.CordovaPlugin;
@@ -34,7 +35,7 @@ import org.apache.cordova.CallbackContext;
 import org.apache.cordova.PluginResult;
 import org.apache.cordova.CordovaResourceApi;
 
-public class FileOpener2 extends CordovaPlugin {
+public class ConfigReader extends CordovaPlugin {
 
 	/**
 	 * Executes the request and returns a boolean.
@@ -48,23 +49,8 @@ public class FileOpener2 extends CordovaPlugin {
 	 * @return boolean.
 	 */
 	public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
-		if (action.equals("open")) {
-			this._open(args.getString(0), args.getString(1), callbackContext);
-		} 
-		else if (action.equals("uninstall")) {
-			this._uninstall(args.getString(0), callbackContext);
-		}
-		else if (action.equals("appIsInstalled")) {
-			JSONObject successObj = new JSONObject();
-			if (this._appIsInstalled(args.getString(0))) {
-				successObj.put("status", PluginResult.Status.OK.ordinal());
-				successObj.put("message", "Installed");
-			}
-			else {
-				successObj.put("status", PluginResult.Status.NO_RESULT.ordinal());
-				successObj.put("message", "Not installed");
-			}
-			callbackContext.success(successObj);
+		if (action.equals("get")) {
+			this._get(args.getString(0), callbackContext);
 		}
 		else {
 			JSONObject errorObj = new JSONObject();
@@ -75,75 +61,17 @@ public class FileOpener2 extends CordovaPlugin {
 		return true;
 	}
 
-	private void _open(String fileArg, String contentType, CallbackContext callbackContext) throws JSONException {
-		String fileName = "";
+	private void _get(String PreferenceName, CallbackContext callbackContext) throws JSONException {
+		SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
 		try {
-			CordovaResourceApi resourceApi = webView.getResourceApi();
-			Uri fileUri = resourceApi.remapUri(Uri.parse(fileArg));
-			fileName = this.stripFileProtocol(fileUri.toString());
-		} catch (Exception e) {
-			fileName = fileArg;
-		}
-		File file = new File(fileName);
-		if (file.exists()) {
-			try {
-				Uri path = Uri.fromFile(file);
-				Intent intent = new Intent(Intent.ACTION_VIEW);
-				intent.setDataAndType(path, contentType);
-				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				/*
-				 * @see
-				 * http://stackoverflow.com/questions/14321376/open-an-activity-from-a-cordovaplugin
-				 */
-				cordova.getActivity().startActivity(intent);
-				//cordova.getActivity().startActivity(Intent.createChooser(intent,"Open File in..."));
-				callbackContext.success();
-			} catch (android.content.ActivityNotFoundException e) {
+				String preferenceValue = preferences.getString(PreferenceName, "");
+				callbackContext.success(preferenceValue);
+			} catch (Exception e) {
 				JSONObject errorObj = new JSONObject();
 				errorObj.put("status", PluginResult.Status.ERROR.ordinal());
 				errorObj.put("message", "Activity not found: " + e.getMessage());
 				callbackContext.error(errorObj);
 			}
-		} else {
-			JSONObject errorObj = new JSONObject();
-			errorObj.put("status", PluginResult.Status.ERROR.ordinal());
-			errorObj.put("message", "File not found");
-			callbackContext.error(errorObj);
-		}
 	}
 	
-	private void _uninstall(String packageId, CallbackContext callbackContext) throws JSONException {
-		if (this._appIsInstalled(packageId)) {
-			Intent intent = new Intent(Intent.ACTION_UNINSTALL_PACKAGE);
-			intent.setData(Uri.parse("package:" + packageId));
-			cordova.getActivity().startActivity(intent);
-			callbackContext.success();
-		}
-		else {
-			JSONObject errorObj = new JSONObject();
-			errorObj.put("status", PluginResult.Status.ERROR.ordinal());
-			errorObj.put("message", "This package is not installed");
-			callbackContext.error(errorObj);
-		}
-	}
-	
-	private boolean _appIsInstalled(String packageId) {
-		PackageManager pm = cordova.getActivity().getPackageManager();
-        boolean appInstalled = false;
-        try {
-            pm.getPackageInfo(packageId, PackageManager.GET_ACTIVITIES);
-            appInstalled = true;
-        } catch (PackageManager.NameNotFoundException e) {
-            appInstalled = false;
-        }
-        return appInstalled;
-	}
-
-	private String stripFileProtocol(String uriString) {
-		if (uriString.startsWith("file://")) {
-			uriString = uriString.substring(7);
-		}
-		return uriString;
-	}
-
 }
