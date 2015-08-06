@@ -69,7 +69,7 @@ public class ConfigReader extends CordovaPlugin {
 				callbackContext.error("No data");
 			}
 		}catch (Exception e){
-			callbackContext.error("Could Not Retreive " + PreferenceName + e.getMessage());
+			callbackContext.error("Could Not Retreive " + PreferenceName + e);
 		}
 	}
 	
