@@ -59,7 +59,8 @@ public class ConfigReader extends CordovaPlugin {
 	}
 
 	private void _get(String PreferenceName, CallbackContext callbackContext) throws JSONException {
-		SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(Context);
+		Context context = cordova.getActivity();
+		SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
 		try {
 				String preferenceValue = preferences.getString(PreferenceName, "algo");
 				callbackContext.success(preferenceValue);
