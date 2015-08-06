@@ -21,14 +21,18 @@ IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-#import <Cordova/CDV.h>
+//
+//  ConfigReader.h
+//
+//  Created by Billy.Caballero on 8/5/15.
+//  Copyright (c) 2015 Billy.Caballero. All rights reserved.
+//
 
-@interface FileOpener2 : CDVPlugin <UIDocumentInteractionControllerDelegate> {
-    NSString *localFile;
-}
+#import <Foundation/Foundation.h>
 
-@property(nonatomic, strong) UIDocumentInteractionController *controller;
+@interface ConfigReader : NSObject
 
-- (void) open: (CDVInvokedUrlCommand*)command;
++ (instancetype)sharedConfig;
+- (NSString *) get:(NSString *)identifier;
 
 @end
