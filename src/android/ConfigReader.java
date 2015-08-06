@@ -65,14 +65,11 @@ public class ConfigReader extends CordovaPlugin {
 			if(SharedPref.contains(PreferenceName)){
 				KeyVal = SharedPref.getString(PreferenceName, "nada");
 				callbackContext.success(KeyVal);
-				return true;
 			}else{
 				callbackContext.error("No data");
-				return false;
 			}
 		}catch (Exception e){
 			callbackContext.error("Could Not Retreive " + PreferenceName + e.getMessage());
-			return false;
 		}
 	}
 	
