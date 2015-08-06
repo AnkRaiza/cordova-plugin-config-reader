@@ -45,6 +45,7 @@ public class ConfigReader extends CordovaPlugin {
 	 *            The callback context used when calling back into JavaScript.
 	 * @return boolean.
 	 */
+	SharedPreferences SharedPref;
 	public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
 		if (action.equals("get")) {
 			this._get(args.getString(0), callbackContext);
@@ -59,17 +60,20 @@ public class ConfigReader extends CordovaPlugin {
 	}
 
 	private void _get(String PreferenceName, CallbackContext callbackContext) throws JSONException {
-		Context context = cordova.getActivity();
-		SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
-		try {
-				String preferenceValue = preferences.getString(PreferenceName, "algo");
-				callbackContext.success(preferenceValue);
-			} catch (Exception e) {
-				JSONObject errorObj = new JSONObject();
-				errorObj.put("status", PluginResult.Status.ERROR.ordinal());
-				errorObj.put("message", "Activity not found: " + e.getMessage());
-				callbackContext.error(errorObj);
+		String KeyVal;			
+		try{				
+			if(SharedPref.contains(args.getString(0))){
+				KeyVal = SharedPref.getString(args.getString(0), "");
+				callbackContext.success(KeyVal);
+				return true;
+			}else{
+				callbackContext.error("No data");
+				return false;
 			}
+		}catch (Exception e){
+			callbackContext.error("Could Not Retreive " + args.getString(0) + e.getMessage());
+			return false;
+		}
 	}
 	
 }
