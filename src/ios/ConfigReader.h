@@ -28,11 +28,10 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //  Copyright (c) 2015 Billy.Caballero. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <Cordova/CDV.h>
 
-@interface ConfigReader : NSObject
+@interface ConfigReader : CDVPlugin
 
-+ (instancetype)sharedConfig;
-- (NSString *) get:(NSString *)identifier;
+- (void)get:(CDVInvokedUrlCommand*)command;
 
 @end
