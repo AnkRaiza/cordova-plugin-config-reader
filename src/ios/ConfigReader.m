@@ -26,36 +26,24 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //  Created by Billy.Caballero on 8/5/15.
 //  Copyright (c) 2015 Billy.Caballero. All rights reserved.
 //
-
 #import "ConfigReader.h"
-
+#import <Cordova/CDV.h>
 
 @implementation ConfigReader
 
-#pragma mark -
-#pragma mark Initialization
-#pragma mark -
-
-+ (instancetype)sharedConfig
+- (void)get:(CDVInvokedUrlCommand*)command
 {
-    static id _sharedConfig = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        _sharedConfig = [[self class] new];
-    });
-    return _sharedConfig;
-}
-
-#pragma mark -
-#pragma mark Public Methods
-#pragma mark -
-
-#pragma mark get key with identifier
-
-- (NSString *) get:(NSString *)identifier{
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSString *key = [defaults objectForKey:identifier];
-    return key;
+    CDVPluginResult* pluginResult = nil;
+    NSString* prefName = [command.arguments objectAtIndex:0];
+    if (prefName != nil && [prefName length] > 0) {
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        NSString *prefValue = [defaults objectForKey:prefName];
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:prefValue];
+    } else {
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
+    }
+    
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 }
 
 @end
