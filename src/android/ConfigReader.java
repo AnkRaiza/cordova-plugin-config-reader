@@ -62,8 +62,8 @@ public class ConfigReader extends CordovaPlugin {
 	private void _get(String PreferenceName, CallbackContext callbackContext) throws JSONException {
 		String KeyVal;			
 		try{				
-			if(SharedPref.contains(args.getString(0))){
-				KeyVal = SharedPref.getString(args.getString(0), "");
+			if(SharedPref.contains(PreferenceName)){
+				KeyVal = SharedPref.getString(PreferenceName, "nada");
 				callbackContext.success(KeyVal);
 				return true;
 			}else{
@@ -71,7 +71,7 @@ public class ConfigReader extends CordovaPlugin {
 				return false;
 			}
 		}catch (Exception e){
-			callbackContext.error("Could Not Retreive " + args.getString(0) + e.getMessage());
+			callbackContext.error("Could Not Retreive " + PreferenceName + e.getMessage());
 			return false;
 		}
 	}
