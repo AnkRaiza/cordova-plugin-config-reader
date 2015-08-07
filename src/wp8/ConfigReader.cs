@@ -14,7 +14,7 @@ namespace WPCordovaClassLib.Cordova.Commands
     public class ConfigReader : BaseCommand
     {
 
-        public async void get(string options)
+        public void get(string options)
         {
             string[] args = JSON.JsonHelper.Deserialize<string[]>(options);
 
