@@ -8,6 +8,7 @@ using System.Windows.Media;
 using Windows.Storage;
 using System.Diagnostics;
 using System.IO;
+using System.IO.IsolatedStorage;
 
 namespace WPCordovaClassLib.Cordova.Commands
 {
