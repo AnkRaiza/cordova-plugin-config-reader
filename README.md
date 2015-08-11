@@ -16,7 +16,8 @@ Usage
 Android
 insert your shared preferences to be read on the js side
 
-	SharedPreferences SharedPref = this.getSharedPreferences("configStrings", Context.MODE_PRIVATE);
+	SharedPreferences SharedPref = this.getSharedPreferences("configStrings",
+	Context.MODE_PRIVATE);
 	SharedPreferences.Editor editor = SharedPref.edit();
 	editor.putString("googleAnalyticsId", "XXXXXX");
 	editor.putString("raygunId", "XXXXXX");
