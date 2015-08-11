@@ -15,6 +15,7 @@ Usage
 ------
 Android
 insert your shared preferences to be read on the js side
+
 	SharedPreferences SharedPref = this.getSharedPreferences("configStrings", Context.MODE_PRIVATE);
 	SharedPreferences.Editor editor = SharedPref.edit();
 	editor.putString("googleAnalyticsId", "XXXXXX");
@@ -25,6 +26,7 @@ insert your shared preferences to be read on the js side
 	
 WP8
 insert your IsolatedStorageSettings to be read on the js side
+
 IsolatedStorageSettings appSettings = IsolatedStorageSettings.ApplicationSettings;
 if (!appSettings.Contains("googleAnalyticsId"))
 {
@@ -36,6 +38,7 @@ if (!appSettings.Contains("googleAnalyticsId"))
 }
 IOS
 insert you userpref to be read on the js side
+
 NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 [defaults setObject:@"XXXXXX" forKey:@"googleAnalyticsId"];
 [defaults setObject:@"XXXXXX" forKey:@"raygunId"];
