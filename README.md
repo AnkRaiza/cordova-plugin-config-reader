@@ -36,6 +36,8 @@ if (!appSettings.Contains("googleAnalyticsId"))
     appSettings.Add("salt", "XXXXXX");
     appSettings.Save();
 }
+
+
 IOS
 insert you userpref to be read on the js side
 
