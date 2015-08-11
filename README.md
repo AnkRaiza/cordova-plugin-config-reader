@@ -28,15 +28,15 @@ insert your shared preferences to be read on the js side
 WP8
 insert your IsolatedStorageSettings to be read on the js side
 
-IsolatedStorageSettings appSettings = IsolatedStorageSettings.ApplicationSettings;
-if (!appSettings.Contains("googleAnalyticsId"))
-{
+	IsolatedStorageSettings appSettings = IsolatedStorageSettings.ApplicationSettings;
+	if (!appSettings.Contains("googleAnalyticsId"))
+	{
 	appSettings.Add("googleAnalyticsId", "XXXXXX");
-    appSettings.Add("raygunId", "XXXXXX");
-    appSettings.Add("llave", "XXXXXX");
-    appSettings.Add("salt", "XXXXXX");
-    appSettings.Save();
-}
+	appSettings.Add("raygunId", "XXXXXX");
+	appSettings.Add("llave", "XXXXXX");
+	appSettings.Add("salt", "XXXXXX");
+	appSettings.Save();
+	}
 
 
 IOS
