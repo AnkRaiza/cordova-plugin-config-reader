@@ -42,12 +42,12 @@ insert your IsolatedStorageSettings to be read on the js side
 IOS
 insert you userpref to be read on the js side
 
-NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-[defaults setObject:@"XXXXXX" forKey:@"googleAnalyticsId"];
-[defaults setObject:@"XXXXXX" forKey:@"raygunId"];
-[defaults setObject:@"XXXXXX" forKey:@"llave"];
-[defaults setObject:@"XXXXXX" forKey:@"salt"];
-[defaults synchronize];
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	[defaults setObject:@"XXXXXX" forKey:@"googleAnalyticsId"];
+	[defaults setObject:@"XXXXXX" forKey:@"raygunId"];
+	[defaults setObject:@"XXXXXX" forKey:@"llave"];
+	[defaults setObject:@"XXXXXX" forKey:@"salt"];
+	[defaults synchronize];
 
 LICENSE
 --------
