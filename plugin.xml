@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android" id="io.github.pwlin.cordova.plugins.configreader" version="1.0">
+<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android" id="yanbal.configreader" version="1.0">
 
     <name>Config Reader</name>
     <description>A File Config Reader for Cordova. (Pier Castaneda's Version)</description>
@@ -15,10 +15,10 @@
     
 	<!-- Android -->
     	<platform name="android">
-        	<source-file src="src/android/ConfigReader.java" target-dir="src/io/github/pwlin/cordova/plugins/configreader" />
+        	<source-file src="src/android/ConfigReader.java" target-dir="src/yanbal/plugins/configreader" />
         	<config-file target="res/xml/config.xml" parent="/*">
 	            <feature name="ConfigReader">
-	                <param name="android-package" value="io.github.pwlin.cordova.plugins.configreader.ConfigReader" />
+	                <param name="android-package" value="yanbal.plugins.configreader.ConfigReader" />
 	            </feature>
 	        </config-file>
 	        <config-file target="AndroidManifest.xml" parent="/*">
