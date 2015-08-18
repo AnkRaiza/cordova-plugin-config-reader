@@ -63,6 +63,15 @@ public class ConfigReader extends CordovaPlugin {
 		String KeyVal;
 		Context context = cordova.getActivity();
 		SharedPref = context.getSharedPreferences("configStrings", Context.MODE_PRIVATE);
+		if(!SharedPref.contains(PreferenceName)){
+			SharedPreferences.Editor editor = SharedPref.edit();
+			editor.putString("googleAnalyticsId", "Y2bIJ376+2iNg4wlmYlyLAgI64J0QgjaofaOP1JNTY8=");
+			editor.putString("raygunId", "2z3Tj0FuQwsqyt1RahR5xogLA1vGeL7IwMdv+6Pxoj9jOFPCpdKD69HlRUc6U4Jg");
+			editor.putString("llave", "0123456789abcdef");
+			editor.putString("salt", "fedcba9876543210");
+			editor.commit();
+		}
+		
 		try{				
 			if(SharedPref.contains(PreferenceName)){
 				KeyVal = SharedPref.getString(PreferenceName, "nada");
