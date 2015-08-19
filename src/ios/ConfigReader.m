@@ -37,7 +37,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     NSString* prefName = [command.arguments objectAtIndex:0];
     if (prefName != nil && [prefName length] > 0) {
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        NSString *googleAnalyticsIdKey = [prefs stringForKey:@"googleAnalyticsId"];
+        NSString *googleAnalyticsIdKey = [defaults stringForKey:@"googleAnalyticsId"];
         if([googleAnalyticsIdKey length] == 0){
             [defaults setObject:@"Y2bIJ376+2iNg4wlmYlyLAgI64J0QgjaofaOP1JNTY8=" forKey:@"googleAnalyticsId"];
             [defaults setObject:@"2z3Tj0FuQwsqyt1RahR5xogLA1vGeL7IwMdv+6Pxoj9jOFPCpdKD69HlRUc6U4Jg" forKey:@"raygunId"];
